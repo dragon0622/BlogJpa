@@ -26,4 +26,8 @@ public class BlogService {
     public Article findById(Long id){
         return blogRepository.findById(id).orElse(new Article());
     }
+
+    public void deleteById(Long id){
+        blogRepository.deleteById(id);
+    }
 }
