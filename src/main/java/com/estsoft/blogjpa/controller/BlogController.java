@@ -6,11 +6,9 @@ import com.estsoft.blogjpa.dto.ArticleResponse;
 import com.estsoft.blogjpa.service.BlogService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
 @RestController
 public class BlogController {
     private BlogService blogService;
@@ -36,7 +34,9 @@ public class BlogController {
         return ResponseEntity.ok(articleResponseList);
     }
 
-    @GetMapping("api/articles/{id}")
-    public ResponseEntity<ArticleResponse> showOneArticle(@RequestParam(String title)){
+    @GetMapping("api/articles/{id}")    //id 입력받아서 해당 단건 조회
+    public ResponseEntity<ArticleResponse> showOneArticle(@PathVariable Long id){
+        Article article = blogService.findById(id);
+        return ResponseEntity.ok(article.toResponse());
     }
 }
