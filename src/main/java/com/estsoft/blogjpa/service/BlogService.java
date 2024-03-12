@@ -3,6 +3,7 @@ package com.estsoft.blogjpa.service;
 import com.estsoft.blogjpa.domain.Article;
 import com.estsoft.blogjpa.dto.AddArticleRequest;
 import com.estsoft.blogjpa.repository.BlogRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,5 +30,12 @@ public class BlogService {
 
     public void deleteById(Long id){
         blogRepository.deleteById(id);
+    }
+
+    @Transactional
+    public Article update(Long id, AddArticleRequest request){
+        Article article = findById(id);
+        article.update(request.getTitle(), request.getContent());
+        return article;
     }
 }

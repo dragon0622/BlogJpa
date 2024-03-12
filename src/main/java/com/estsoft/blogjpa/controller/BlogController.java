@@ -4,6 +4,7 @@ import com.estsoft.blogjpa.domain.Article;
 import com.estsoft.blogjpa.dto.AddArticleRequest;
 import com.estsoft.blogjpa.dto.ArticleResponse;
 import com.estsoft.blogjpa.service.BlogService;
+import org.hibernate.sql.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -44,5 +45,13 @@ public class BlogController {
     public ResponseEntity<Void> deleteOneArticle(@PathVariable Long id){
         blogService.deleteById(id);
         return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/api/articles/{id}")
+    public ResponseEntity<Article> updateOneArticle(@PathVariable Long id,
+                                                    @RequestBody AddArticleRequest request){
+        Article updatedArticle = blogService.update(id,request);
+
+        return ResponseEntity.status(HttpStatus.OK).body(updatedArticle);
     }
 }
