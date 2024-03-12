@@ -1,8 +1,13 @@
 package com.estsoft.blogjpa.domain;
 
 import jakarta.persistence.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+@Getter
 @Entity
+@NoArgsConstructor
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,23 +20,9 @@ public class Article {
     @Column(name = "content", nullable = false)
     private String content;
 
+    @Builder
     public Article(String title, String content) {
         this.title = title;
         this.content = content;
-    }
-
-    public Article() {
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
     }
 }
