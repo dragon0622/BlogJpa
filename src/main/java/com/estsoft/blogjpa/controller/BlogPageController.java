@@ -1,10 +1,12 @@
 package com.estsoft.blogjpa.controller;
 
+import com.estsoft.blogjpa.domain.Article;
 import com.estsoft.blogjpa.dto.ArticleViewResponse;
 import com.estsoft.blogjpa.service.BlogService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -25,4 +27,14 @@ public class BlogPageController {
 
         return "articleList";   // articleList.html라는 뷰 조회
     }
+
+    @GetMapping("/articles/{id}")   //상세 html 뷰로 전환을 위한 Get
+    public String showArticle(@PathVariable Long id, Model model) {
+        Article article = blogService.findById(id);
+        model.addAttribute("article", new ArticleViewResponse(article));
+
+        return "article";
+    }
+
+
 }
