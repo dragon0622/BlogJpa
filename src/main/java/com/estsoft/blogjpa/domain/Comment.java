@@ -1,5 +1,6 @@
 package com.estsoft.blogjpa.domain;
 
+import com.estsoft.blogjpa.dto.CommentResponse;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
@@ -35,6 +36,14 @@ public class Comment {
     public Comment(Long articleId, String body){
         this.articleId = articleId;
         this.body = body;
+    }
+
+    public CommentResponse toResponse(){
+        return CommentResponse.builder()
+                .id(this.id)
+                .body(this.body)
+                .created_at(this.createdAt)
+                .build();
     }
 
 }
