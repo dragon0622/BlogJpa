@@ -14,7 +14,7 @@ public class UserController {
     }
 
     @PostMapping("/user")
-    public String signup(AddUserRequest request){
+    public String signup(AddUserRequest request){         // json형태일때는 @RequsetBody 해줘야합니다.
         userService.save(request);
         return "redirect:/login";
     }
