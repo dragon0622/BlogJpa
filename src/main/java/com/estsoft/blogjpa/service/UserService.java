@@ -17,11 +17,10 @@ public class UserService {
     }
 
     public User save(AddUserRequest dto) {
-        return userRepository.save(
-                User.builder()
-                        .email(dto.getEmail())
-                        .password(encoder.encode(dto.getPassword()))
-                        .build()
+        return userRepository.save(new User(
+                dto.getEmail(),
+                encoder.encode(dto.getPassword())
+                )
         );
     }
 }
