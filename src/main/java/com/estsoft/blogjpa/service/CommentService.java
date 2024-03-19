@@ -22,6 +22,6 @@ public class CommentService {
 
     public Comment findCommentById(Long articleId, Long commentId) {
 
-        return commentRepository.findByArticleId(articleId,commentId);
+        return commentRepository.findByArticleIdAndId(articleId,commentId).orElseThrow(IllegalAccessError::new);
     }
 }
