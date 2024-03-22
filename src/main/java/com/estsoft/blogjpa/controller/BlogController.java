@@ -4,12 +4,17 @@ import com.estsoft.blogjpa.domain.Article;
 import com.estsoft.blogjpa.dto.AddArticleRequest;
 import com.estsoft.blogjpa.dto.ArticleResponse;
 import com.estsoft.blogjpa.service.BlogService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import org.hibernate.sql.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+@Tag(name = "blog CRUD")
 @RestController
 public class BlogController {
     private BlogService blogService;
@@ -19,12 +24,14 @@ public class BlogController {
     }
 
     @PostMapping("api/articles")
+    @Operation(summary = "게시글 추가", description = "블로그 메인의 게시글 목록에 추가")
     public ResponseEntity<ArticleResponse> addArticle(@RequestBody AddArticleRequest request){
         Article article = blogService.save(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(article.toResponse());
     }
 
-    //=@GetMapping("ari/articles")
+    @GetMapping("ari/articles")
+    @Operation(summary = "게시글 목록 불러오기", description = "게시글 목록에 모든 게시물 조회")
     @RequestMapping(value="api/allarticles", method = RequestMethod.GET)
     public ResponseEntity<List<ArticleResponse>> showArticle(){
         List<Article> articleList = blogService.findAll();
