@@ -79,3 +79,6 @@
 <hr>
 
 # BlogJpa 내용
+이스트소프트 부트캠프 오르미 4기 과정 중 Blog CRUD, JPA 활용을 위한 실습 파일이다.
+
+domain, controller, service, repository의 생성 및 내부 메소드 구현, JPA를 통한 database 접근 등을 실습해 보았다.
